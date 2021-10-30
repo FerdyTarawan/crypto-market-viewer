@@ -1,4 +1,12 @@
-import { Avatar, Flex, Input, Text, useMediaQuery } from '@chakra-ui/react';
+import {
+  Avatar,
+  Button,
+  Flex,
+  Heading,
+  Input,
+  Text,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'react-table';
@@ -6,25 +14,38 @@ import { Column } from 'react-table';
 import LoadingFullscreen from 'components/LoadingFullscreen';
 import MarketList from 'components/MarketList';
 import MarketTable from 'components/MarketTable';
-import useMarket from 'hooks/useMarket';
+import { FILTER_TAG } from 'constants/filter';
+import type { State } from 'hooks';
+import { useMarket, useStore } from 'hooks';
 import { TickerWithAsset } from 'types/ticker';
 import { abbreviateNumber, toFixed } from 'utils/format';
 import { formatCurrency } from 'utils/market';
 
+const SELECTOR = (state: State) => ({
+  filterTag: state.filterTag,
+  setFilterTag: state.setFilterTag,
+});
+
 const MarketPage: React.FC = () => {
   const { data, isLoading } = useMarket('USDT');
+  const { filterTag, setFilterTag } = useStore(SELECTOR);
   const { t } = useTranslation();
   const [pageIndexState, setPageIndexState] = useState<number>(0);
   const [filter, setFilter] = useState('');
   const filteredData = useMemo(
     () =>
-      data?.filter(
-        (datum) =>
-          datum.assetCode.toLowerCase().includes(filter) ||
-          datum.assetName.toLowerCase().includes(filter),
-      ),
-    [data, filter],
+      data
+        ?.filter(
+          (datum) =>
+            datum.assetCode.toLowerCase().includes(filter) ||
+            datum.assetName.toLowerCase().includes(filter),
+        )
+        .filter((datum) =>
+          filterTag === '' ? true : datum.tags.includes(filterTag),
+        ),
+    [data, filter, filterTag],
   );
+
   const columns = useMemo<Column<TickerWithAsset>[]>(
     () => [
       {
@@ -72,6 +93,7 @@ const MarketPage: React.FC = () => {
     ],
     [filteredData],
   );
+
   const [isMobile] = useMediaQuery('(max-width: 480px)');
 
   if (isLoading && data === undefined) {
@@ -79,15 +101,33 @@ const MarketPage: React.FC = () => {
   }
 
   return (
-    <Flex flexDir="column" overflowX="auto" p={10}>
+    <Flex flexDir="column" px={10}>
+      <Heading my={4}>{t('title')}</Heading>
+      <Flex overflowX="auto">
+        {FILTER_TAG.map((tag) => (
+          <Button
+            key={tag.value}
+            colorScheme="orange"
+            minWidth="80px"
+            mx={2}
+            onClick={() => setFilterTag(tag.value)}
+            size="xs"
+            variant={tag.value === filterTag ? 'solid' : 'outline'}
+          >
+            {tag.name}
+          </Button>
+        ))}
+      </Flex>
+
       <Input
-        mb="4"
+        my={4}
         onChange={(e) => setFilter(e.target.value)}
         placeholder={t('table.filter.placeholder')}
         size="md"
         value={filter}
         variant="outline"
       />
+
       {isMobile ? (
         <MarketList data={filteredData ?? []} />
       ) : (

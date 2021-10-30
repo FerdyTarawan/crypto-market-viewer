@@ -40,7 +40,7 @@ const fetchMarketTicker = async (): Promise<TickerResponse> => {
   return response.data!;
 };
 
-const useMarket = (
+export const useMarket = (
   currency: string,
 ): UseQueryResult<TickerWithAsset[], unknown> => {
   const assets = useStore.getState().cryptoAsset;
@@ -51,5 +51,3 @@ const useMarket = (
 
   return queryInfo;
 };
-
-export default useMarket;
