@@ -2,5 +2,13 @@
   "error": {
     "routeNotFound": "404 Route does not exist"
   },
-  "title": "Welcome to react with snowpack!"
+  "table": {
+    "header": {
+      "name": "Name",
+      "price": "Price",
+      "dailyChange": "24H Change",
+      "dailyVolume": "24H Volume"
+    }
+  },
+  "title": "Crypto Market Viewer"
 }
