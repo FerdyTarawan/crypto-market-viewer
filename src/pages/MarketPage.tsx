@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-key */
 import {
   ArrowLeftIcon,
