@@ -3,6 +3,9 @@
     "routeNotFound": "404 Route does not exist"
   },
   "table": {
+    "filter": {
+      "placeholder": "Search Cryptocurrency"
+    },
     "header": {
       "name": "Name",
       "price": "Price",
