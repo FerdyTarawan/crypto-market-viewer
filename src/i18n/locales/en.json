@@ -1,0 +1,6 @@
+{
+  "error": {
+    "routeNotFound": "404 Route does not exist"
+  },
+  "title": "Welcome to react with snowpack!"
+}
