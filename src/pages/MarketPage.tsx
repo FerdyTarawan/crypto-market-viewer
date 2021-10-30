@@ -42,7 +42,7 @@ const MarketPage: React.FC = () => {
         )
         .filter((datum) =>
           filterTag === '' ? true : datum.tags.includes(filterTag),
-        ),
+        ) ?? [],
     [data, filter, filterTag],
   );
 
@@ -120,11 +120,11 @@ const MarketPage: React.FC = () => {
       />
 
       {isMobile ? (
-        <MarketList data={filteredData ?? []} />
+        <MarketList data={filteredData} />
       ) : (
         <MarketTable
           columns={columns}
-          data={filteredData ?? []}
+          data={filteredData}
           indexState={pageIndexState}
           setIndexState={setPageIndexState}
         />
