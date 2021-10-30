@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   Flex,
   Heading,
   Input,
@@ -14,6 +13,7 @@ import { Column } from 'react-table';
 import LoadingFullscreen from 'components/LoadingFullscreen';
 import MarketList from 'components/MarketList';
 import MarketTable from 'components/MarketTable';
+import Tags from 'components/Tags';
 import { FILTER_TAG } from 'constants/filter';
 import type { State } from 'hooks';
 import { useMarket, useStore } from 'hooks';
@@ -103,21 +103,12 @@ const MarketPage: React.FC = () => {
   return (
     <Flex flexDir="column" px={10}>
       <Heading my={4}>{t('title')}</Heading>
-      <Flex overflowX="auto">
-        {FILTER_TAG.map((tag) => (
-          <Button
-            key={tag.value}
-            colorScheme="orange"
-            minWidth="80px"
-            mx={2}
-            onClick={() => setFilterTag(tag.value)}
-            size="xs"
-            variant={tag.value === filterTag ? 'solid' : 'outline'}
-          >
-            {tag.name}
-          </Button>
-        ))}
-      </Flex>
+
+      <Tags
+        onSelectTag={setFilterTag}
+        options={FILTER_TAG}
+        selectedTag={filterTag}
+      />
 
       <Input
         my={4}
