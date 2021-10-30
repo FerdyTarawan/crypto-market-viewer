@@ -1,9 +1,10 @@
-import { Avatar, Flex, Input, Text } from '@chakra-ui/react';
+import { Avatar, Flex, Input, Text, useMediaQuery } from '@chakra-ui/react';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 
 import LoadingFullscreen from 'components/LoadingFullscreen';
+import MarketList from 'components/MarketList';
 import MarketTable from 'components/MarketTable';
 import useMarket from 'hooks/useMarket';
 import { TickerWithAsset } from 'types/ticker';
@@ -32,7 +33,7 @@ const MarketPage: React.FC = () => {
           <Flex flexDir="row">
             <Avatar name={row.assetCode} size="md" src={row.fullLogoUrl} />
             <Flex flexDir="column" ml={4} mt={1}>
-              <Text>{row.assetCode}</Text>
+              <Text fontWeight="bold">{row.assetCode}</Text>
               <Text>{row.assetName}</Text>
             </Flex>
           </Flex>
@@ -41,7 +42,10 @@ const MarketPage: React.FC = () => {
       {
         Header: t<string>('table.header.price'),
         accessor: (row) => (
-          <Text color={row.prevClosePrice > row.lastPrice ? 'red' : 'green'}>
+          <Text
+            color={row.prevClosePrice > row.lastPrice ? 'red' : 'green'}
+            fontWeight="semibold"
+          >
             {formatCurrency(row.lastPrice, 'USD', 'en', false, {
               decimalPlaces: 2,
             })}
@@ -51,18 +55,24 @@ const MarketPage: React.FC = () => {
       {
         Header: t<string>('table.header.dailyChange'),
         accessor: (row) => (
-          <Text color={row.priceChangePercent < 0 ? 'red' : 'green'}>
+          <Text
+            color={row.priceChangePercent < 0 ? 'red' : 'green'}
+            fontWeight="semibold"
+          >
             {`${toFixed(row.priceChangePercent, 2)}%`}
           </Text>
         ),
       },
       {
         Header: t<string>('table.header.dailyVolume'),
-        accessor: (row) => <Text>{abbreviateNumber(row.volume)}</Text>,
+        accessor: (row) => (
+          <Text fontWeight="semibold">{abbreviateNumber(row.volume)}</Text>
+        ),
       },
     ],
     [filteredData],
   );
+  const [isMobile] = useMediaQuery('(max-width: 480px)');
 
   if (isLoading && data === undefined) {
     return <LoadingFullscreen />;
@@ -78,12 +88,16 @@ const MarketPage: React.FC = () => {
         value={filter}
         variant="outline"
       />
-      <MarketTable
-        columns={columns}
-        data={filteredData ?? []}
-        indexState={pageIndexState}
-        setIndexState={setPageIndexState}
-      />
+      {isMobile ? (
+        <MarketList data={filteredData ?? []} />
+      ) : (
+        <MarketTable
+          columns={columns}
+          data={filteredData ?? []}
+          indexState={pageIndexState}
+          setIndexState={setPageIndexState}
+        />
+      )}
     </Flex>
   );
 };

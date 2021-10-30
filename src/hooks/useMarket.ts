@@ -45,7 +45,7 @@ const useMarket = (
 ): UseQueryResult<TickerWithAsset[], unknown> => {
   const assets = useStore.getState().cryptoAsset;
   const queryInfo = useQuery(['market', { currency }], fetchMarketTicker, {
-    refetchInterval: secondsToMilliseconds(60),
+    refetchInterval: secondsToMilliseconds(10000),
     select: transformFromTickerReponse(assets, currency),
   });
 
