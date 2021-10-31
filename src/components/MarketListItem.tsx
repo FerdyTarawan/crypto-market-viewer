@@ -50,7 +50,7 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
         <Text color="gray.500">{t('table.header.dailyVolume')}</Text>
         <Text fontWeight="semibold">{abbreviateNumber(data.volume)}</Text>
       </Flex>
-      {isLastItem && <Divider my={2} />}
+      {!isLastItem && <Divider my={2} />}
     </Flex>
   );
 };

@@ -18,7 +18,7 @@ const MarketList: React.FC<MarketListProps> = ({ data }) => {
         <MarketListItem
           key={datum.id}
           data={datum}
-          isLastItem={index !== data.length - 1}
+          isLastItem={index === data.length - 1}
           t={t}
         />
       ))}
