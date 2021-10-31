@@ -1,6 +1,6 @@
 import { FilterTag } from 'types/filter';
 
-export const FILTER_TAG: FilterTag[] = [
+export const DEFAULT_FILTER_TAG: FilterTag[] = [
   { name: 'All', value: '' },
   { name: 'DeFi', value: 'defi' },
   { name: 'Innovation', value: 'innovation-zone' },

@@ -14,7 +14,7 @@ import LoadingFullscreen from 'components/LoadingFullscreen';
 import MarketList from 'components/MarketList';
 import MarketTable from 'components/MarketTable';
 import Tags from 'components/Tags';
-import { FILTER_TAG } from 'constants/filter';
+import { DEFAULT_FILTER_TAG } from 'constants/filter';
 import type { State } from 'hooks';
 import { useMarket, useStore } from 'hooks';
 import { TickerWithAsset } from 'types/ticker';
@@ -106,7 +106,7 @@ const MarketPage: React.FC = () => {
 
       <Tags
         onSelectTag={setFilterTag}
-        options={FILTER_TAG}
+        options={DEFAULT_FILTER_TAG}
         selectedTag={filterTag}
       />
 
