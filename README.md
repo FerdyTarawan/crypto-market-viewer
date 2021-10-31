@@ -1,3 +1,15 @@
+# Setup
+
+Create **.env** file and insert variables as described in **.env.example**
+
+# Library Used
+- react-query
+- zustand
+- chakra-ui
+- apisauce
+- react-table
+- react-router
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
