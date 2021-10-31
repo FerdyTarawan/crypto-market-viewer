@@ -91,7 +91,7 @@ const MarketPage: React.FC = () => {
         ),
       },
     ],
-    [filteredData],
+    [],
   );
 
   const [isMobile] = useMediaQuery('(max-width: 480px)');
