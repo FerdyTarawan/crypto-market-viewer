@@ -37,8 +37,8 @@ const MarketPage: React.FC = () => {
       data
         ?.filter(
           (datum) =>
-            datum.assetCode.toLowerCase().includes(filter) ||
-            datum.assetName.toLowerCase().includes(filter),
+            datum.assetCode.toLowerCase().includes(filter.toLowerCase()) ||
+            datum.assetName.toLowerCase().includes(filter.toLowerCase()),
         )
         .filter((datum) =>
           filterTag === '' ? true : datum.tags.includes(filterTag),
