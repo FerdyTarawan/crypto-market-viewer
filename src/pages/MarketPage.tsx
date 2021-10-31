@@ -101,7 +101,7 @@ const MarketPage: React.FC = () => {
   }
 
   return (
-    <Flex flexDir="column" px={10}>
+    <Flex flexDir="column" px={isMobile ? 2 : 10}>
       <Heading my={4}>{t('title')}</Heading>
 
       <Tags
