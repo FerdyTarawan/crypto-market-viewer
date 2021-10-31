@@ -18,7 +18,7 @@ import { FILTER_TAG } from 'constants/filter';
 import type { State } from 'hooks';
 import { useMarket, useStore } from 'hooks';
 import { TickerWithAsset } from 'types/ticker';
-import { abbreviateNumber, toFixed } from 'utils/format';
+import { abbreviateNumber } from 'utils/format';
 import { formatCurrency } from 'utils/market';
 
 const SELECTOR = (state: State) => ({
@@ -80,7 +80,7 @@ const MarketPage: React.FC = () => {
             color={row.priceChangePercent < 0 ? 'red' : 'green'}
             fontWeight="semibold"
           >
-            {`${toFixed(row.priceChangePercent, 2)}%`}
+            {`${row.priceChangePercent.toFixed(2)}%`}
           </Text>
         ),
       },

@@ -3,7 +3,7 @@ import React from 'react';
 import { TFunction } from 'react-i18next';
 
 import { TickerWithAsset } from 'types/ticker';
-import { abbreviateNumber, toFixed } from 'utils/format';
+import { abbreviateNumber } from 'utils/format';
 import { formatCurrency } from 'utils/market';
 
 export interface MarketListItemProps {
@@ -44,7 +44,7 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
         <Text
           color={data.priceChangePercent < 0 ? 'red' : 'green'}
           fontWeight="semibold"
-        >{`${toFixed(data.priceChangePercent, 2)}%`}</Text>
+        >{`${data.priceChangePercent.toFixed(2)}%`}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text color="gray.500">{t('table.header.dailyVolume')}</Text>
