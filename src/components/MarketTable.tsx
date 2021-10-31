@@ -17,6 +17,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Column, usePagination, useTable } from 'react-table';
 
 import { TickerWithAsset } from 'types/ticker';
@@ -36,6 +37,8 @@ const MarketTable: React.FC<MarketTableProps> = ({
   pageSize,
   setIndexState,
 }) => {
+  const { t } = useTranslation();
+
   const {
     canNextPage,
     canPreviousPage,
@@ -104,18 +107,18 @@ const MarketTable: React.FC<MarketTableProps> = ({
 
       <Flex alignItems="center" justifyContent="center" m={4}>
         <Flex m={4}>
-          <Tooltip label="First Page">
+          <Tooltip label={t('table.pagination.first')}>
             <IconButton
-              aria-label="First Page"
+              aria-label={t('table.pagination.first')}
               icon={<ArrowLeftIcon h={3} w={3} />}
               isDisabled={!canPreviousPage}
               mr={4}
               onClick={() => navigateToPage(0)}
             />
           </Tooltip>
-          <Tooltip label="Previous Page">
+          <Tooltip label={t('table.pagination.previous')}>
             <IconButton
-              aria-label="Previous Page"
+              aria-label={t('table.pagination.previous')}
               icon={<ChevronLeftIcon h={6} w={6} />}
               isDisabled={!canPreviousPage}
               onClick={navigateToPreviousPage}
@@ -124,17 +127,17 @@ const MarketTable: React.FC<MarketTableProps> = ({
         </Flex>
 
         <Flex m={4}>
-          <Tooltip label="Next Page">
+          <Tooltip label={t('table.pagination.next')}>
             <IconButton
-              aria-label="Next Page"
+              aria-label={t('table.pagination.next')}
               icon={<ChevronRightIcon h={6} w={6} />}
               isDisabled={!canNextPage}
               onClick={navigateToNextPage}
             />
           </Tooltip>
-          <Tooltip label="Last Page">
+          <Tooltip label={t('table.pagination.last')}>
             <IconButton
-              aria-label="Last Page"
+              aria-label={t('table.pagination.last')}
               icon={<ArrowRightIcon h={3} w={3} />}
               isDisabled={!canNextPage}
               ml={4}

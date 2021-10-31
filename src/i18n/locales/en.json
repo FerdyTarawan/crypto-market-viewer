@@ -7,10 +7,16 @@
       "placeholder": "Search Cryptocurrency"
     },
     "header": {
-      "name": "Name",
-      "price": "Price",
       "dailyChange": "24H Change",
-      "dailyVolume": "24H Volume"
+      "dailyVolume": "24H Volume",
+      "name": "Name",
+      "price": "Price"
+    },
+    "pagination": {
+      "first": "First Page",
+      "last": "Last Page",
+      "next": "Next Page",
+      "previous": "Previous Page"
     }
   },
   "title": "Crypto Market Viewer"
